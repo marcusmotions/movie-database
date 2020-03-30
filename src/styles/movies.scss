@@ -1,0 +1,51 @@
+.app {
+  .main {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    .pagination {
+      position: fixed;
+      bottom: 0px;
+      background-color: white;
+      margin-bottom: 0px;
+      padding-bottom: 5px;
+    }
+    .movie-page-detail {
+      .menu {
+        display: flex;
+        align-items: center;
+        .favorites {
+          font-size: 30px;
+          margin-left: 5px;
+          cursor: pointer;
+          &:hover {
+            font-size: 40px;
+            transition: 0.6s;
+          }
+        }
+      }
+      justify-items: center;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      border: solid;
+      border-radius: 15px;
+      border-width: thin;
+      width: 200px;
+      margin: 10px;
+      text-align: center;
+      .poster {
+        width: 150px;
+        height: auto;
+        margin: 10px;
+      }
+      .poster:hover {
+        width: 160px;
+        transition: 0.6s;
+        cursor: pointer;
+      }
+    }
+  }
+}
