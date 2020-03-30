@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Pagination from "@material-ui/lab/Pagination";
 
+const DEFAULT_PLACEHOLDER_IMAGE =
+  "https://www.creativefabrica.com/wp-content/uploads/2018/12/Movie-roll-cinema-entertainment-icon-EPS-10-by-Hoeda80.jpg";
+
 interface MoviesProps {
   movies: any;
 }
@@ -26,26 +29,26 @@ const Main: React.FC<MoviesProps> = props => {
   const handleChange = (event: any, value: React.SetStateAction<number>) => {
     setPage(value);
   };
-  const [paginationArray, setPaginationArray] = useState([] as any[]);
+  const [paginationArray, setPaginationArray] = useState<any[]>();
   function paginate(array: any[], page_size: number, page_number: number) {
     return array.slice((page_number - 1) * page_size, page_number * page_size);
   }
   useEffect(() => {
-    const paginateSave = paginate(extractedMovies, 5, page);
+    const paginateSave =
+      extractedMovies && paginate(extractedMovies && extractedMovies, 5, page);
     setPaginationArray(paginateSave);
   }, [page, extractedMovies]);
 
-  const DEFAULT_PLACEHOLDER_IMAGE =
-    "https://www.creativefabrica.com/wp-content/uploads/2018/12/Movie-roll-cinema-entertainment-icon-EPS-10-by-Hoeda80.jpg";
-
   return (
     <div className="main">
-      {paginationArray &&
+      {extractedMovies &&
+        paginationArray &&
+        paginationArray.length !== undefined &&
         paginationArray.map((movie: any) => (
           <div className="movie-page-detail" key={movie.imdbID}>
             <p>{movie.Title}</p>
             <p>{movie.Year}</p>
-            <Link to={`/detail/${movie.imdbID}`}>
+            <Link to={`/detail/${movie && movie.imdbID}`}>
               <img
                 className="poster"
                 alt="poster"
@@ -58,7 +61,7 @@ const Main: React.FC<MoviesProps> = props => {
             </Link>
           </div>
         ))}
-      {extractedMovies[0] && (
+      {extractedMovies && extractedMovies[0] && (
         <div className="pagination">
           <div className={classes.root}>
             <Pagination
